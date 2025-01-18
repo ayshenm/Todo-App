@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:todo_app/constants/color.dart';
+import 'package:todo_app/constants/task_type.dart';
+import 'package:todo_app/model/task.dart';
 import 'package:todo_app/screens/add_new_task.dart';
 import 'package:todo_app/todo_item.dart';
 
@@ -12,10 +14,40 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> todoList = ["Study Lessons", "Run 5K", "Go to party"];
-  List<String> complated = [
-    "Game meetup",
-    "Take out trash",
+  // List<String> todoList = ["Study Lessons", "Run 5K", "Go to party"];
+  // List<String> complated = [
+  //   "Game meetup",
+  //   "Take out trash",
+  // ];
+  List<Task> todoList = [
+    Task(
+        type: TaskType.note,
+        title: "Study Lessons",
+        description: "Study cop 117",
+        isComplate: false),
+    Task(
+        type: TaskType.calendar,
+        title: "Run 5K",
+        description: "Running sheet",
+        isComplate: false),
+    Task(
+        type: TaskType.contest,
+        title: "Go to party",
+        description: "Go to red",
+        isComplate: false)
+  ];
+
+  List<Task> complated = [
+    Task(
+        type: TaskType.calendar,
+        title: "Run 5K",
+        description: "Running sheet",
+        isComplate: false),
+    Task(
+        type: TaskType.contest,
+        title: "Go to party",
+        description: "Go to red",
+        isComplate: false)
   ];
   @override
   Widget build(BuildContext context) {
@@ -69,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemCount: todoList.length,
                       itemBuilder: (context, index) {
                         return TodoItem(
-                          title: todoList[index],
+                          task: todoList[index],
                         );
                       },
                     ))),
@@ -93,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     shrinkWrap: true,
                     itemCount: complated.length,
                     itemBuilder: (context, index) {
-                      return TodoItem(title: complated[index]);
+                      return TodoItem(task: complated[index]);
                     },
                   )),
                 ),
