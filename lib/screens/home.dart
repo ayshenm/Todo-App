@@ -14,11 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // List<String> todoList = ["Study Lessons", "Run 5K", "Go to party"];
-  // List<String> complated = [
-  //   "Game meetup",
-  //   "Take out trash",
-  // ];
   List<Task> todoList = [
     Task(
         type: TaskType.note,
@@ -36,6 +31,12 @@ class _HomeScreenState extends State<HomeScreen> {
         description: "Go to red",
         isComplate: false)
   ];
+
+  void addNewTask(Task newTask) {
+   setState(() {
+     todoList.add(newTask);
+   }); 
+  }
 
   List<Task> complated = [
     Task(
@@ -133,7 +134,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => AddNewTaskScreen(),
+                      builder: (context) => AddNewTaskScreen(
+                        addNewTask: (newTask) => addNewTask(newTask),
+                      ),
                     ));
                   },
                   child: Text("Add New Task"))
